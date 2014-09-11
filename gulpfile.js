@@ -23,6 +23,7 @@ var paths = {
   ],
 
   test : [
+    path.join(__dirname, "test", "helpers", "setup.js"),
     path.join(__dirname, "test", "**", "*_spec.js")
   ]
 };

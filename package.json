@@ -1,7 +1,7 @@
 {
   "scripts": {
     "coverage": "gulp coverage && xdg-open coverage.html || open coverage.html",
-    "start": "hapi -c lib/server.json",
+    "start": "hapi -c lib/server.json -p lib/plugins/",
     "test": "gulp"
   },
   "name": "vitrino",
@@ -20,6 +20,8 @@
     "gulp-jshint": "^1.8.4",
     "gulp-lab": "^1.0.0",
     "jshint-stylish": "^0.4.0",
-    "lab": "^4.3.0"
+    "lab": "^4.3.0",
+    "mummy": "^0.4.4",
+    "zombie": "^2.0.0-alpha31"
   }
 }
