@@ -1,5 +1,5 @@
-vintrino
-========
+vitrino
+=======
 
 [![Build Status](https://travis-ci.org/bandwidthcom/vitrino.svg?branch=master)](https://travis-ci.org/bandwidthcom/vitrino)
 
