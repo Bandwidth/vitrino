@@ -72,8 +72,8 @@
 	"disallowMultipleLineBreaks"  : true,
 	"validateLineBreaks"          : "LF",
 	"validateQuoteMarks"          : "\"",
-	"validateIndentation"         : "\t",
-	"disallowMixedSpacesAndTabs"  : "smart",
+	"validateIndentation"         : 2,
+	"disallowMixedSpacesAndTabs"  : true,
 	"disallowTrailingWhitespace"  : true,
 	"disallowTrailingComma"       : true,
 

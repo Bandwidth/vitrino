@@ -1,6 +1,7 @@
 {
   "scripts": {
     "coverage": "gulp coverage && xdg-open coverage.html || open coverage.html",
+    "start": "hapi -c lib/server.json",
     "test": "gulp"
   },
   "name": "vitrino",
@@ -9,6 +10,7 @@
   "author": "Jeff Jagoda <jjagoda@bandwidth.com>",
   "license": "MIT",
   "dependencies": {
+    "hapi": "^6.8.1",
     "lodash": "^2.4.1",
     "q": "^1.0.1"
   },

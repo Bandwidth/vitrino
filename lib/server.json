@@ -1,0 +1,13 @@
+{
+  "pack" : {},
+
+  "plugins" : {
+  },
+
+  "servers" : [
+    {
+      "host" : "$env.HOST",
+      "port" : "$env.PORT"
+    }
+  ]
+}
