@@ -1,0 +1,23 @@
+{
+  "scripts": {
+    "coverage": "gulp coverage && xdg-open coverage.html || open coverage.html",
+    "test": "gulp"
+  },
+  "name": "vitrino",
+  "version": "0.0.0",
+  "description": "bandwidthlabs.com website and project showcase.",
+  "author": "Jeff Jagoda <jjagoda@bandwidth.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "q": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-jscs": "^1.1.2",
+    "gulp-jshint": "^1.8.4",
+    "gulp-lab": "^1.0.0",
+    "jshint-stylish": "^0.4.0",
+    "lab": "^4.3.0"
+  }
+}
