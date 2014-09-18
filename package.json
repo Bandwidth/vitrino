@@ -22,6 +22,7 @@
     "jshint-stylish": "^0.4.0",
     "lab": "^4.3.0",
     "mummy": "^0.4.4",
+    "node-uuid": "^1.4.1",
     "zombie": "^2.0.0-alpha31"
   }
 }
