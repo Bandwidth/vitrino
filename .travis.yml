@@ -2,3 +2,10 @@ language: node_js
 node_js:
 - '0.11'
 - '0.10'
+deploy:
+  provider: heroku
+  api_key:
+    secure: ax8jrWhvE4XyYVjzDoBev6WR3Fz/QdwqBSW+H1nwRQ3oHbKsh3FetqlS37GndfVODKbbGlGO1uEb4EoFAILFSa1dBvETOp02Vy78ygZ63xk7sdCBFnHrFR3RziwABsYeWFwVIm0idT8cqp7QGa/n7c020poqSasmtnxrGU6nubA=
+  app: vitrino
+  on:
+    repo: bandwidthcom/vitrino
