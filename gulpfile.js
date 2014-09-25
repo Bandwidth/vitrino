@@ -95,7 +95,7 @@ gulp.task("style", function () {
 
 gulp.task("test", [ "lint", "style" ], function () {
   var options = {
-    args : "-p -t 100",
+    args : "-v -p -t 100",
     opts : { emitLabError : true }
   };
 

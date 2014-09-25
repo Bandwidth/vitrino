@@ -10,6 +10,7 @@
   "author": "Jeff Jagoda <jjagoda@bandwidth.com>",
   "license": "MIT",
   "dependencies": {
+    "good": "^2.3.0",
     "hapi": "^6.8.1",
     "lodash": "^2.4.1",
     "q": "^1.0.1"

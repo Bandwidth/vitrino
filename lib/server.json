@@ -2,6 +2,7 @@
   "pack" : {},
 
   "plugins" : {
+    "good" : {},
     "./webui" : {}
   },
 

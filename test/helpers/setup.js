@@ -1,18 +1,31 @@
 "use strict";
 var Browser = require("zombie");
 var Driver  = require("./driver");
+var Good    = require("good");
 var Lab     = require("lab");
-var mummy   = require("mummy");
-var path    = require("path");
+var Mummy   = require("mummy");
+var Path    = require("path");
 var script  = exports.lab = Lab.script();
+var Sinon   = require("sinon");
 
-var before   = script.before;
+var after  = script.after;
+var before = script.before;
+
+var good;
 
 before(function (done) {
-  var lib      = path.join(__dirname, "..", "..", "lib");
-  var plugins  = path.join(lib, "plugins");
-  var manifest = path.join(lib, "server.json");
+  var lib      = Path.join(__dirname, "..", "..", "lib");
+  var plugins  = Path.join(lib, "plugins");
+  var manifest = Path.join(lib, "server.json");
 
-  mummy.extend(manifest, plugins, done);
+  // Suppress log messages during testing.
+  good = Sinon.stub(Good, "register").callsArg(2);
+
+  Mummy.extend(manifest, plugins, done);
   Browser.extend(Driver.extend);
+});
+
+after(function (done) {
+  good.restore();
+  done();
 });
