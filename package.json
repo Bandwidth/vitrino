@@ -13,6 +13,7 @@
     "good": "^2.3.0",
     "hapi": "^6.8.1",
     "lodash": "^2.4.1",
+    "mustache": "^0.8.2",
     "q": "^1.0.1"
   },
   "devDependencies": {
