@@ -1,14 +1,9 @@
 "use strict";
-var Bower   = require("gulp-bower");
-var FS      = require("fs");
-var Gulp    = require("gulp");
-var Jscs    = require("gulp-jscs");
-var Jshint  = require("gulp-jshint");
-var Lab     = require("gulp-lab");
-var Path    = require("path");
-var Q       = require("q");
-var Stylish = require("jshint-stylish");
-var _       = require("lodash");
+var FS   = require("fs");
+var Gulp = require("gulp");
+var Path = require("path");
+var Q    = require("q");
+var _    = require("lodash");
 
 var paths = {
   jscs : Path.join(__dirname, ".jscsrc"),
@@ -31,6 +26,9 @@ var paths = {
 };
 
 function lint (options, files) {
+  var Jshint  = require("gulp-jshint");
+  var Stylish = require("jshint-stylish");
+
   return Gulp.src(files)
   .pipe(new Jshint(options))
   .pipe(Jshint.reporter(Stylish))
@@ -54,16 +52,20 @@ function promisefy (stream) {
 }
 
 function style (options, files) {
+  var Jscs = require("gulp-jscs");
   return Gulp.src(files).pipe(new Jscs(options));
 }
 
 Gulp.task("assets", [ "bower" ]);
 
 Gulp.task("bower", function () {
+  var Bower = require("gulp-bower");
   return (new Bower()).pipe(Gulp.dest("lib/static"));
 });
 
 Gulp.task("coverage", function () {
+  var Lab = require("gulp-lab");
+
   var options = {
     args : "-p -r html -o" + Path.join(__dirname, "coverage.html"),
     opts : { emitLabError : false }
@@ -102,6 +104,8 @@ Gulp.task("style", function () {
 });
 
 Gulp.task("test", [ "assets", "lint", "style" ], function () {
+  var Lab = require("gulp-lab");
+
   var options = {
     args : "-v -p -t 100",
     opts : { emitLabError : true }
