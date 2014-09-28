@@ -10,23 +10,25 @@ var expect   = Lab.expect;
 var it       = script.it;
 
 describe("A page helper", function () {
-  var page;
+  describe("on a typical page", function () {
+    var page;
 
-  before(function (done) {
-    var browser = new Browser();
+    before(function (done) {
+      var browser = new Browser();
 
-    page = new Page(browser);
-    browser.loadFixture("test_fixture.html").nodeify(done);
-  });
+      page = new Page(browser);
+      browser.loadFixture("test_fixture.html").nodeify(done);
+    });
 
-  it("can retrieve the page title", function (done) {
-    expect(page.title(), "title").to.equal("Test Fixture");
-    done();
-  });
+    it("can retrieve the page title", function (done) {
+      expect(page.title(), "title").to.equal("Test Fixture");
+      done();
+    });
 
-  it("can retrieve the main content header", function (done) {
-    expect(page.contentHeader(), "header").to.equal("Content Header");
-    done();
+    it("can retrieve the main content header", function (done) {
+      expect(page.contentHeader(), "header").to.equal("Content Header");
+      done();
+    });
   });
 
   describe("on a page with jQuery", function () {
@@ -59,6 +61,22 @@ describe("A page helper", function () {
       expect(function () {
         page.jQuery();
       }).to.throw(/jquery is not present/i);
+      done();
+    });
+  });
+
+  describe("on a page with a navbar", function () {
+    var page;
+
+    before(function (done) {
+      var browser = new Browser();
+
+      page = new Page(browser);
+      browser.loadFixture("navbar.html").nodeify(done);
+    });
+
+    it("can return the name of the active page", function (done) {
+      expect(page.activeNav(), "active nav").to.equal("Active");
       done();
     });
   });

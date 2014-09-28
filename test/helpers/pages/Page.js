@@ -2,6 +2,11 @@
 var expect = require("lab").expect;
 
 function Page (browser) {
+  this.activeNav = function () {
+    var element = browser.querySelector("ul.nav li.active");
+    return browser.text(element);
+  };
+
   this.contentHeader = function () {
     return browser.text("h1");
   };
