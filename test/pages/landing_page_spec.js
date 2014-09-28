@@ -26,4 +26,9 @@ describe("The landing page", function () {
     expect(page.title(), "title").to.equal(LandingPage.title);
     done();
   });
+
+  it("has a content header", function (done) {
+    expect(page.contentHeader(), "content header").to.equal(LandingPage.contentHeader);
+    done();
+  });
 });

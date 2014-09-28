@@ -5,7 +5,9 @@ function LandingPage (browser) {
 	Page.call(this, browser);
 }
 
-LandingPage.title = "vitrino";
+LandingPage.contentHeader = "Bandwidth Labs Showcase";
+
+LandingPage.title = "Bandwidth Labs: Showcase";
 
 LandingPage.visit = function (browser) {
 	return browser.visit("/");

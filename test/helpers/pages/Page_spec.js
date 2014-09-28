@@ -23,4 +23,9 @@ describe("The page helper", function () {
     expect(page.title(), "title").to.equal("Test Fixture");
     done();
   });
+
+  it("can retrieve the main content header", function (done) {
+    expect(page.contentHeader(), "header").to.equal("Content Header");
+    done();
+  });
 });

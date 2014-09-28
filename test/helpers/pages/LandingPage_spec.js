@@ -20,7 +20,13 @@ describe("The LandingPage helper", function () {
   });
 
   it("has a title", function (done) {
-    expect(LandingPage, "title").to.have.property("title", "vitrino");
+    expect(LandingPage, "title").to.have.property("title", "Bandwidth Labs: Showcase");
+    done();
+  });
+
+  it("has a content header", function (done) {
+    expect(LandingPage, "content header")
+    .to.have.property("contentHeader", "Bandwidth Labs Showcase");
     done();
   });
 
