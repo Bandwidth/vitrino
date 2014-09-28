@@ -5,6 +5,16 @@ function Page (browser) {
     return browser.text("h1");
   };
 
+  this.jQuery = function () {
+    var jQuery = browser.window.$;
+
+    if (!jQuery) {
+      throw new Error("jQuery is not present.");
+    }
+
+    return jQuery;
+  };
+
   this.title = function () {
     return browser.text("title");
   };

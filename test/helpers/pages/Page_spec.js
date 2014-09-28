@@ -28,4 +28,38 @@ describe("The page helper", function () {
     expect(page.contentHeader(), "header").to.equal("Content Header");
     done();
   });
+
+  describe("on a page with jQuery", function () {
+    var page;
+
+    before(function (done) {
+      var browser = new Browser();
+
+      page = new Page(browser);
+      browser.loadFixture("jquery.html").nodeify(done);
+    });
+
+    it("can return the jQuery object", function (done) {
+      expect(page.jQuery(), "jQuery").to.exist;
+      done();
+    });
+  });
+
+  describe("on a page without jQuery", function () {
+    var page;
+
+    before(function (done) {
+      var browser = new Browser();
+
+      page = new Page(browser);
+      browser.loadFixture("test_fixture.html").nodeify(done);
+    });
+
+    it("throws an exception when trying to retrieve jQuery", function (done) {
+      expect(function () {
+        page.jQuery();
+      }).to.throw(/jquery is not present/i);
+      done();
+    });
+  });
 });

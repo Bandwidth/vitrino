@@ -21,6 +21,7 @@ before(function (done) {
   // Suppress log messages during testing.
   good = Sinon.stub(Good, "register").callsArg(2);
 
+  Browser.default.silent = true;
   Mummy.extend(manifest, plugins, done);
   Browser.extend(Driver.extend);
 });
