@@ -65,7 +65,7 @@ describe("A page helper", function () {
     });
   });
 
-  describe("on a page with a navbar", function () {
+  describe("on a page with an active nav element", function () {
     var page;
 
     before(function (done) {
@@ -77,6 +77,24 @@ describe("A page helper", function () {
 
     it("can return the name of the active page", function (done) {
       expect(page.activeNav(), "active nav").to.equal("Active");
+      done();
+    });
+  });
+
+  describe("on a page without an active nav element", function () {
+    var page;
+
+    before(function (done) {
+      var browser = new Browser();
+
+      page = new Page(browser);
+      browser.loadFixture("test_fixture.html").nodeify(done);
+    });
+
+    it("fails to get the active nav element", function (done) {
+      expect(function () {
+        page.activeNav();
+      }).to.throw(/no active nav/i);
       done();
     });
   });

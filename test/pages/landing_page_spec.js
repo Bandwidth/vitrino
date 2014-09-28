@@ -38,4 +38,9 @@ describe("The landing page", function () {
   });
 
   Page.describeNavbar(context);
+
+  it("activates a nav element", function (done) {
+    expect(page.activeNav(), "active nav").to.equal(LandingPage.activeNav);
+    done();
+  });
 });

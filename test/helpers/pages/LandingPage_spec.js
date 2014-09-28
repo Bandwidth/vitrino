@@ -30,6 +30,11 @@ describe("A LandingPage helper", function () {
     done();
   });
 
+  it("has an active nav element", function (done) {
+    expect(LandingPage, "active nav").to.have.property("activeNav", "Home");
+    done();
+  });
+
   describe("visiting the page", function () {
     var browser;
 

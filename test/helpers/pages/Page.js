@@ -4,6 +4,11 @@ var expect = require("lab").expect;
 function Page (browser) {
   this.activeNav = function () {
     var element = browser.querySelector("ul.nav li.active");
+
+    if (!element) {
+      throw new Error("No active nav element was found.");
+    }
+
     return browser.text(element);
   };
 
