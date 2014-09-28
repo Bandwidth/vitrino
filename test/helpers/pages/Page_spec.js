@@ -9,7 +9,7 @@ var describe = script.describe;
 var expect   = Lab.expect;
 var it       = script.it;
 
-describe("The page helper", function () {
+describe("A page helper", function () {
   var page;
 
   before(function (done) {

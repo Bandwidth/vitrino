@@ -11,7 +11,7 @@ var describe = script.describe;
 var expect   = Lab.expect;
 var it       = script.it;
 
-describe("The LandingPage helper", function () {
+describe("A LandingPage helper", function () {
   it("is a page helper", function (done) {
     expect(LandingPage, "type").to.be.a("function");
     expect(LandingPage.prototype, "supertype").to.be.an.instanceOf(Page);

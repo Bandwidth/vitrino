@@ -13,6 +13,7 @@ LandingPage.visit = function (browser) {
 	return browser.visit("/");
 };
 
-LandingPage.prototype = Object.create(Page.prototype);
+LandingPage.prototype             = Object.create(Page.prototype);
+LandingPage.prototype.constructor = LandingPage;
 
 module.exports = LandingPage;

@@ -2,6 +2,7 @@
 var Browser     = require("zombie");
 var Lab         = require("lab");
 var LandingPage = require("../helpers/pages/LandingPage");
+var Page        = require("../helpers/pages/Page");
 var script      = exports.lab = Lab.script();
 
 var before   = script.before;
@@ -10,6 +11,10 @@ var expect   = Lab.expect;
 var it       = script.it;
 
 describe("The landing page", function () {
+  var context = {
+    script : script
+  };
+
   var page;
 
   before(function (done) {
@@ -17,7 +22,7 @@ describe("The landing page", function () {
 
     browser.goto(LandingPage)
     .then(function (helper) {
-      page = helper;
+      page = context.page = helper;
     })
     .nodeify(done);
   });
@@ -31,4 +36,6 @@ describe("The landing page", function () {
     expect(page.contentHeader(), "content header").to.equal(LandingPage.contentHeader);
     done();
   });
+
+  Page.describeNavbar(context);
 });
