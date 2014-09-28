@@ -1,5 +1,7 @@
 "use strict";
-var expect = require("lab").expect;
+var Browser = require("zombie");
+var expect  = require("lab").expect;
+var URL     = require("url");
 
 function Page (browser) {
   this.activeNav = function () {
@@ -77,6 +79,46 @@ Page.describeNavbar = function (context) {
       var home = navbar.find(".nav.navbar-nav a:contains('Home')");
       expect(home, "home").to.have.length(1);
       expect(home.attr("href"), "href").to.equal("/");
+      done();
+    });
+
+    it("has a link to the projects page", function (done) {
+      var projects = navbar.find(".nav.navbar-nav a:contains('Projects')");
+      expect(projects, "projects").to.have.length(1);
+      expect(projects.attr("href"), "href").to.equal("/projects");
+      done();
+    });
+  });
+};
+
+Page.isAPageHelper = function (script, Constructor, path) {
+  var before   = script.before;
+  var describe = script.describe;
+  var it       = script.it;
+
+  it("is a page helper", function (done) {
+    expect(Constructor, "type").to.be.a("function");
+    expect(Constructor.prototype, "supertype").to.be.an.instanceOf(Page);
+    expect(Constructor.prototype.constructor, "constructor").to.equal(Constructor);
+    expect(Constructor.visit, "visit").to.be.a("function");
+    done();
+  });
+
+  describe("visiting the page", function () {
+    var browser;
+
+    before(function (done) {
+      try {
+        browser = new Browser();
+        Constructor.visit(browser).nodeify(done);
+      }
+      catch (error) {
+        done(error);
+      }
+    });
+
+    it("navigates to the home page", function (done) {
+      expect(browser.url, "URL").to.equal(URL.resolve(browser.site, path));
       done();
     });
   });
