@@ -3,13 +3,16 @@ var expect = require("lab").expect;
 
 function Page (browser) {
   this.activeNav = function () {
-    var element = browser.querySelector("ul.nav li.active");
+    var activeNav = browser.queryAll("ul.nav li.active");
 
-    if (!element) {
+    if (activeNav.length === 0) {
       throw new Error("No active nav element was found.");
     }
+    else if (activeNav.length > 1) {
+      throw new Error("Found multiple active nav elements.");
+    }
 
-    return browser.text(element);
+    return browser.text(activeNav[0]);
   };
 
   this.contentHeader = function () {

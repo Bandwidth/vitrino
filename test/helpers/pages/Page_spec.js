@@ -98,4 +98,22 @@ describe("A page helper", function () {
       done();
     });
   });
+
+  describe("on a page with multiple active nav elements", function () {
+    var page;
+
+    before(function (done) {
+      var browser = new Browser();
+
+      page = new Page(browser);
+      browser.loadFixture("multiple_navs.html").nodeify(done);
+    });
+
+    it("fails to get the active nav element", function (done) {
+      expect(function () {
+        page.activeNav();
+      }).to.throw(/multiple active nav/i);
+      done();
+    });
+  });
 });
