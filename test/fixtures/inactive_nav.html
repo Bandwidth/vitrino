@@ -1,0 +1,23 @@
+<html>
+<body>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a>Unactive</a></li>
+          <li><a>Active</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <script src="/static/jquery/dist/jquery.js"></script>
+  <script>
+    var active = $("ul.nav a:contains('Active')");
+    active.attr("href", window.location.pathname);
+  </script>
+  <script src="/static/showcase.js"></script>
+</body>
+</html>

@@ -6,9 +6,12 @@ var Q    = require("q");
 var _    = require("lodash");
 
 var paths = {
+  client : Path.join(__dirname, "lib", "client", "*.js"),
+
   jscs : Path.join(__dirname, ".jscsrc"),
 
   jshint : {
+    client : Path.join(__dirname, "lib", "client", ".jshintrc"),
     source : Path.join(__dirname, ".jshintrc"),
     test   : Path.join(__dirname, "test", ".jshintrc")
   },
@@ -16,6 +19,7 @@ var paths = {
   source : [
     Path.join(__dirname, "*.js"),
     Path.join(__dirname, "lib", "**", "*.js"),
+    "!" + Path.join(__dirname, "lib", "client", "**", "*.js"),
     "!" + Path.join(__dirname, "lib", "static", "**", "*.js")
   ],
 
@@ -56,7 +60,9 @@ function style (options, files) {
   return Gulp.src(files).pipe(new Jscs(options));
 }
 
-Gulp.task("assets", [ "bower" ]);
+Gulp.task("assets", [ "bower" ], function () {
+  return Gulp.src(paths.client).pipe(Gulp.dest("lib/static"));
+});
 
 Gulp.task("bower", function () {
   var Bower = require("gulp-bower");
@@ -76,7 +82,18 @@ Gulp.task("coverage", function () {
 
 Gulp.task("default", [ "test" ]);
 
-Gulp.task("lint", [ "lint-source", "lint-test" ]);
+Gulp.task("lint", [ "lint-client", "lint-source", "lint-test" ]);
+
+Gulp.task("lint-client", function () {
+  return Q.all([
+    loadOptions(paths.jshint.client),
+    loadOptions(paths.jshint.source)
+  ])
+  .spread(function (client, source) {
+    var options = _.merge(source, client);
+    return promisefy(lint(options, paths.client));
+  });
+});
 
 Gulp.task("lint-source", function () {
   return loadOptions(paths.jshint.source)

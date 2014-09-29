@@ -32,7 +32,10 @@ describe("The projects page", function () {
     done();
   });
 
-  it("activates a nav element");
+  it("activates a nav element", function (done) {
+    expect(page.activeNav(), "active nav").to.equal("Projects");
+    done();
+  });
 
   Page.describeNavbar(context);
 });
