@@ -15,17 +15,21 @@
     "gulp": "^3.8.8",
     "gulp-bower": "0.0.6",
     "hapi": "^6.8.1",
+    "joi": "^4.7.0",
     "lodash": "^2.4.1",
     "mustache": "^0.8.2",
-    "q": "^1.0.1"
+    "q": "^1.0.1",
+    "wreck": "^5.0.1"
   },
   "devDependencies": {
+    "apparition": "^0.1.1",
     "gulp-jscs": "^1.1.2",
     "gulp-jshint": "^1.8.4",
     "gulp-lab": "^1.0.0",
     "jshint-stylish": "^0.4.0",
     "lab": "^4.3.0",
     "mummy": "^0.4.4",
+    "nock": "^0.48.0",
     "node-uuid": "^1.4.1",
     "sinon": "^1.10.3",
     "zombie": "^2.0.0-alpha31"
