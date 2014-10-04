@@ -128,7 +128,7 @@ Page.isAPageHelper = function (script, Constructor, path) {
       }
     });
 
-    it("navigates to the home page", function (done) {
+    it("navigates to the page URL", function (done) {
       expect(browser.url, "URL").to.equal(URL.resolve(browser.site, path));
       done();
     });

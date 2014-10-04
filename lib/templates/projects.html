@@ -6,7 +6,21 @@
         <h1 class="panel-title">Projects</h1>
       </div>
       <div class="panel-body">
-        There are no active projects at this time. Please check back later.
+        <ul class="project-list">
+        {{# projects }}
+          <li class="project">
+            <a href="{{ url }}">
+              <img class="avatar" src="{{ avatar }}" />
+              <span class="name">{{ name }}</span>
+              <p class="description">{{ description }}</p>
+            </a>
+          </li>
+        {{/ projects }}
+        </ul>
+
+        {{^ projects }}
+          There are no active projects at this time. Please check back later.
+        {{/ projects }}
       </div>
     </div>
   </div>

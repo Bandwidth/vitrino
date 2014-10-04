@@ -60,12 +60,11 @@ describe("The github plugin", function () {
     environment.set(ORGANIZATION_KEY, ORGANIZATION);
     environment.set(TOKEN_KEY, TOKEN);
 
-    Nock.disableNetConnect();
     done();
   });
 
   after(function (done) {
-    Nock.enableNetConnect();
+    environment.restore();
     done();
   });
 
@@ -78,6 +77,7 @@ describe("The github plugin", function () {
   [ ORGANIZATION_KEY, TOKEN_KEY ].forEach(describeRequiredConfig);
 
   describe("with an organization and a token", function () {
+    var AGENT         = "Wreck";
     var AUTHORIZATION = "Basic " + (new Buffer(TOKEN + ":x-oauth-basic")).toString("base64");
 
     var server;
@@ -99,6 +99,7 @@ describe("The github plugin", function () {
       function request () {
         return new Nock(GITHUB_API)
         .matchHeader("Authorization", AUTHORIZATION)
+        .matchHeader("User-Agent", AGENT)
         .get("/orgs/" + ORGANIZATION + "/repos");
       }
 

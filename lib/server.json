@@ -2,8 +2,9 @@
   "pack" : {},
 
   "plugins" : {
-    "good" : {},
-    "./webui" : {}
+    "good"     : {},
+    "./github" : {},
+    "./webui"  : {}
   },
 
   "servers" : [
