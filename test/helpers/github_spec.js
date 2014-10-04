@@ -107,4 +107,97 @@ describe("The GitHub test helper", function () {
       done();
     });
   });
+
+  describe("creating a fake README with a badge", function () {
+    var code    = 200;
+    var name    = "name";
+    var org     = "org";
+
+    var data;
+    var reply;
+    var scope;
+
+    before(function (done) {
+      scope = GitHub.createReadme(org, name, code, true);
+
+      Q.ninvoke(Wreck, "get", "https://raw.githubusercontent.com/org/name/master/README.md")
+      .spread(function (response, payload) {
+        data  = payload;
+        reply = response;
+      })
+      .nodeify(done);
+    });
+
+    it("makes a README with a badge", function (done) {
+      expect(reply.statusCode, "status").to.equal(code);
+      expect(data, "content").to.equal(
+        "[![Bandwidth Labs]" +
+        "(https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)]" +
+        "(http://vitrino.herokuapp.com)"
+      );
+      done();
+    });
+
+    it("returns a nock scope", function (done) {
+      expect(scope, "scope").to.have.property("pendingMocks").that.is.a("function");
+      done();
+    });
+  });
+
+  describe("creating a fake README without a badge", function () {
+    var code    = 404;
+    var name    = "name";
+    var org     = "org";
+
+    var data;
+    var reply;
+    var scope;
+
+    before(function (done) {
+      scope = GitHub.createReadme(org, name, code, false);
+
+      Q.ninvoke(Wreck, "get", "https://raw.githubusercontent.com/org/name/master/README.md")
+      .spread(function (response, payload) {
+        data  = payload;
+        reply = response;
+      })
+      .nodeify(done);
+    });
+
+    it("makes a README without a badge", function (done) {
+      expect(reply.statusCode, "status").to.equal(code);
+      expect(data, "content").to.equal("");
+      done();
+    });
+
+    it("returns a nock scope", function (done) {
+      expect(scope, "scope").to.have.property("pendingMocks").that.is.a("function");
+      done();
+    });
+  });
+
+  describe("resetting a README", function () {
+    var remove;
+
+    before(function (done) {
+      remove = Sinon.stub(Nock, "removeInterceptor");
+      GitHub.resetReadme("org", "name");
+      done();
+    });
+
+    after(function (done) {
+      remove.restore();
+      done();
+    });
+
+    it("unconfigures README mocking", function (done) {
+      expect(remove.callCount, "remove").to.equal(1);
+      expect(remove.firstCall.args[0], "options").to.deep.equal({
+        hostname : "raw.githubusercontent.com",
+        path     : "/org/name/master/README.md",
+        proto    : "https"
+      });
+      done();
+    });
+  });
 });

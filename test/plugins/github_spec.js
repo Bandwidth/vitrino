@@ -1,13 +1,14 @@
 "use strict";
-var Environment = require("apparition").Environment;
-var Github      = require("../../lib/plugins/github");
-var Lab         = require("lab");
-var Nock        = require("nock");
-var Plugins     = require("../helpers/plugins");
-var Sinon       = require("sinon");
-var Wreck       = require("wreck");
+var Environment  = require("apparition").Environment;
+var GitHub       = require("../../lib/plugins/github");
+var GitHubHelper = require("../helpers/github");
+var Lab          = require("lab");
+var Nock         = require("nock");
+var Plugins      = require("../helpers/plugins");
+var Sinon        = require("sinon");
+var Wreck        = require("wreck");
 
-var script      = exports.lab = Lab.script();
+var script = exports.lab = Lab.script();
 
 var after    = script.after;
 var before   = script.before;
@@ -17,7 +18,6 @@ var it       = script.it;
 
 describe("The github plugin", function () {
   var GITHUB_API       = "https://api.github.com";
-  var GITHUB_RAW       = "https://raw.githubusercontent.com";
   var ORGANIZATION     = "organization";
   var ORGANIZATION_KEY = "ORGANIZATION";
   var TOKEN            = "atoken";
@@ -41,7 +41,7 @@ describe("The github plugin", function () {
       });
 
       it("fails to register", function (done) {
-        Plugins.server(Github)
+        Plugins.server(GitHub)
         .then(
           function () {
             throw new Error("Should not succeed.");
@@ -70,7 +70,7 @@ describe("The github plugin", function () {
   });
 
   it("has a name", function (done) {
-    expect(Github.register.attributes, "name").to.have.property("name", "github");
+    expect(GitHub.register.attributes, "name").to.have.property("name", "github");
     done();
   });
 
@@ -84,7 +84,7 @@ describe("The github plugin", function () {
     var server;
 
     before(function (done) {
-      Plugins.server(Github)
+      Plugins.server(GitHub)
       .then(function (result) {
         server = result;
       })
@@ -112,17 +112,13 @@ describe("The github plugin", function () {
         var repositories;
 
         before(function (done) {
-          emptyReadme = new Nock(GITHUB_RAW)
-          .get("/" + ORGANIZATION + "/Pork-Chops/master/README.md")
-          .reply(200, "");
+          emptyReadme = GitHubHelper.createReadme(ORGANIZATION, "Pork-Chops", 200, "");
 
-          noReadme = new Nock(GITHUB_RAW)
-          .get("/" + ORGANIZATION + "/Sandwiches/master/README.md")
-          .reply(404);
+          noReadme = GitHubHelper.createReadme(ORGANIZATION, "Sandwiches", 404);
 
-          readme = new Nock(GITHUB_RAW)
-          .get("/" + ORGANIZATION + "/The-Best-Project-Ever/master/README.md")
-          .reply(
+          readme = GitHubHelper.createReadme(
+            ORGANIZATION,
+            "The-Best-Project-Ever",
             200,
             [
               "[![Bandwidth Labs]",
@@ -185,6 +181,13 @@ describe("The github plugin", function () {
             projects = results;
           })
           .nodeify(done);
+        });
+
+        after(function (done) {
+          GitHubHelper.resetReadme(ORGANIZATION, "Pork-Chops");
+          GitHubHelper.resetReadme(ORGANIZATION, "Sandwiches");
+          GitHubHelper.resetReadme(ORGANIZATION, "The-Best-Project-Ever");
+          done();
         });
 
         it("queries the configured organization", function (done) {
