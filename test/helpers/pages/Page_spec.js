@@ -116,4 +116,20 @@ describe("A page helper", function () {
       done();
     });
   });
+
+  describe("on a page with a content panel", function () {
+    var page;
+
+    before(function (done) {
+      var browser = new Browser();
+
+      page = new Page(browser);
+      browser.loadFixture("panel.html").nodeify(done);
+    });
+
+    it("can return the content text", function (done) {
+      expect(page.content(), "content").to.equal("Some text content.");
+      done();
+    });
+  });
 });

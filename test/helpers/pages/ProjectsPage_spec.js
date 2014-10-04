@@ -16,5 +16,8 @@ describe("A project page helper", function () {
     done();
   });
 
-  it("has an active nav element");
+  it("has an active nav element", function (done) {
+    expect(ProjectsPage, "active nav").to.have.property("activeNav", "Projects");
+    done();
+  });
 });

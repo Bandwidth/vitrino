@@ -32,10 +32,28 @@ describe("The projects page", function () {
     done();
   });
 
-  it("activates a nav element", function (done) {
-    expect(page.activeNav(), "active nav").to.equal("Projects");
-    done();
+  Page.describeNavbar(context, ProjectsPage.activeNav);
+
+  describe("with active projects", function () {
+    it("creates an entry per project");
   });
 
-  Page.describeNavbar(context);
+  describe("without active projects", function () {
+    var page;
+
+    before(function (done) {
+      var browser = new Browser();
+
+      browser.goto(ProjectsPage)
+      .then(function (helper) {
+        page = helper;
+      })
+      .nodeify(done);
+    });
+
+    it("shows a placeholder message", function (done) {
+      expect(page.content(), "content").to.match(/no active projects/i);
+      done();
+    });
+  });
 });

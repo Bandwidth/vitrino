@@ -5,7 +5,8 @@ function ProjectsPage (browser) {
   Page.call(this, browser);
 }
 
-ProjectsPage.title = "Bandwidth Labs: Projects";
+ProjectsPage.activeNav = "Projects";
+ProjectsPage.title     = "Bandwidth Labs: Projects";
 
 ProjectsPage.visit = function (browser) {
   return browser.visit("/projects");

@@ -17,6 +17,11 @@ function Page (browser) {
     return browser.text(activeNav[0]);
   };
 
+  this.content = function () {
+    return browser.text(".panel-body");
+  };
+
+
   this.contentHeader = function () {
     return browser.text("h1");
   };
@@ -36,7 +41,7 @@ function Page (browser) {
   };
 }
 
-Page.describeNavbar = function (context) {
+Page.describeNavbar = function (context, activeNav) {
   var script = context.script;
 
   var before   = script.before;
@@ -45,12 +50,13 @@ Page.describeNavbar = function (context) {
 
   describe("navbar", function () {
     var navbar;
+    var page;
 
     before(function (done) {
       var error = null;
-      var page  = context.page;
-
       var $;
+
+      page  = context.page;
 
       try {
         $ = page.jQuery();
@@ -86,6 +92,11 @@ Page.describeNavbar = function (context) {
       var projects = navbar.find(".nav.navbar-nav a:contains('Projects')");
       expect(projects, "projects").to.have.length(1);
       expect(projects.attr("href"), "href").to.equal("/projects");
+      done();
+    });
+
+    it("has an active nav element", function (done) {
+      expect(page.activeNav(), "active nav").to.equal(activeNav);
       done();
     });
   });
