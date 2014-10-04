@@ -17,6 +17,7 @@ var it       = script.it;
 
 describe("The github plugin", function () {
   var GITHUB_API       = "https://api.github.com";
+  var GITHUB_RAW       = "https://raw.githubusercontent.com";
   var ORGANIZATION     = "organization";
   var ORGANIZATION_KEY = "ORGANIZATION";
   var TOKEN            = "atoken";
@@ -104,17 +105,39 @@ describe("The github plugin", function () {
       }
 
       describe("without an error", function () {
-        var nock;
+        var emptyReadme;
+        var noReadme;
         var projects;
+        var readme;
+        var repositories;
 
         before(function (done) {
-          nock = request().reply(
+          emptyReadme = new Nock(GITHUB_RAW)
+          .get("/" + ORGANIZATION + "/Pork-Chops/master/README.md")
+          .reply(200, "");
+
+          noReadme = new Nock(GITHUB_RAW)
+          .get("/" + ORGANIZATION + "/Sandwiches/master/README.md")
+          .reply(404);
+
+          readme = new Nock(GITHUB_RAW)
+          .get("/" + ORGANIZATION + "/The-Best-Project-Ever/master/README.md")
+          .reply(
+            200,
+            [
+              "[![Bandwidth Labs]",
+              "(https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)]",
+              "(http://vitrino.herokuapp.com)"
+            ].join("")
+          );
+
+          repositories = request().reply(
             200,
             [
               /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
               /* jshint -W106 */
               {
-                name        : "The Best Project Ever",
+                name        : "The-Best-Project-Ever",
                 description : "Pure awesomeness.",
                 private     : false,
                 html_url    : "https://github.com/octocat/Hello-World",
@@ -135,6 +158,19 @@ describe("The github plugin", function () {
                   login      : "somebody",
                   avatar_url : "https://example.com/avatar.gif"
                 }
+              },
+
+              {
+                name        : "Pork-Chops",
+                description : "More food.",
+                private     : true,
+                html_url    : "https://github.com/octocat/Pork-Chops",
+                homepage    : "http://example.com",
+
+                owner : {
+                  login      : "pork",
+                  avatar_url : "https://example.com/chops.gif"
+                }
               }
               /* jshint +W106 */
               /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
@@ -152,7 +188,7 @@ describe("The github plugin", function () {
         });
 
         it("queries the configured organization", function (done) {
-          nock.done();
+          repositories.done();
           done();
         });
 
@@ -161,8 +197,9 @@ describe("The github plugin", function () {
             {
               avatar      : "https://github.com/images/error/octocat_happy.gif",
               description : "Pure awesomeness.",
-              name        : "The Best Project Ever",
+              name        : "The-Best-Project-Ever",
               private     : false,
+              type        : "showcase",
               url         : "https://github.com/octocat/Hello-World"
             },
 
@@ -171,7 +208,17 @@ describe("The github plugin", function () {
               description : "Every creature deserves a warm meal.",
               name        : "Sandwiches",
               private     : true,
+              type        : "other",
               url         : "https://github.com/octocat/Sandwiches"
+            },
+
+            {
+              avatar      : "https://example.com/chops.gif",
+              description : "More food.",
+              name        : "Pork-Chops",
+              private     : true,
+              type        : "other",
+              url         : "http://example.com"
             }
           ]);
           done();
