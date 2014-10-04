@@ -23,6 +23,11 @@ var paths = {
     "!" + Path.join(__dirname, "lib", "static", "**", "*.js")
   ],
 
+  static : [
+    Path.join(__dirname, "lib", "client", "*.js"),
+    Path.join(__dirname, "lib", "client", "*.css")
+  ],
+
   test : [
     Path.join(__dirname, "test", "helpers", "setup.js"),
     Path.join(__dirname, "test", "**", "*_spec.js")
@@ -61,7 +66,7 @@ function style (options, files) {
 }
 
 Gulp.task("assets", [ "bower" ], function () {
-  return Gulp.src(paths.client).pipe(Gulp.dest("lib/static"));
+  return Gulp.src(paths.static).pipe(Gulp.dest("lib/static"));
 });
 
 Gulp.task("bower", function () {
