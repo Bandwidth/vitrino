@@ -35,6 +35,7 @@ ul.project-list li.project a {
 
 ul.project-list li.project div {
   display: inline-block;
+  margin-left: 10px;
   position: relative;
   vertical-align: top;
 }

@@ -90,8 +90,9 @@ describe("The projects page", function () {
           {
             avatar      : "https://github.com/images/error/octocat_happy.gif",
             description : "Pure awesomeness.",
-            name        : "The Best Project Ever",
+            name        : "The-Best-Project-Ever",
             private     : false,
+            type        : "showcase",
             url         : "https://github.com/octocat/Hello-World"
           },
 
@@ -100,7 +101,17 @@ describe("The projects page", function () {
             description : "Every creature deserves a warm meal.",
             name        : "Sandwiches",
             private     : true,
+            type        : "showcase",
             url         : "https://github.com/octocat/Sandwiches"
+          },
+
+          {
+            avatar      : "https://example.com/pork.gif",
+            description : "Bee bee bee.",
+            name        : "Pork-Chops",
+            private     : false,
+            type        : "other",
+            url         : "https://github.com/octocat/Pork-Chops"
           }
         ]
       ));
@@ -117,7 +128,7 @@ describe("The projects page", function () {
       done();
     });
 
-    it("lists the public projects", function (done) {
+    it("lists the public projects with badges", function (done) {
       expect(page.projects(), "list").to.have.length(1);
       done();
     });
@@ -138,7 +149,7 @@ describe("The projects page", function () {
       });
 
       it("has a name", function (done) {
-        expect(project, "name").to.have.property("name", "The Best Project Ever");
+        expect(project, "name").to.have.property("name", "The-Best-Project-Ever");
         done();
       });
 
