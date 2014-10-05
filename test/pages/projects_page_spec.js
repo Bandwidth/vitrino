@@ -45,10 +45,6 @@ describe("The projects page", function () {
 
   Page.describeNavbar(context, ProjectsPage.activeNav);
 
-  describe("with active projects", function () {
-    it("creates an entry per project");
-  });
-
   describe("without active projects", function () {
     var page;
     var projects;
