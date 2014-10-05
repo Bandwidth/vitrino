@@ -51,11 +51,11 @@ it's behavior:
 
 | Variable     | Description                                                 |
 |--------------|-------------------------------------------------------------|
-| ORGANIZATION | The GitHub organization to pull projects fro.               |
+| ORGANIZATION | The GitHub organization to pull projects from.              |
 | PORT         | The port number the server should listen on.                |
 | TOKEN        | The GitHub OAuth token to use to authenticate API requests. |
 
-Other that environment variable configuration, the showcase application behaves
+Other than environment variable configuration, the showcase application behaves
 like any standard node application. Assuming the environment variables are
 configured correctly, the application can be started by running the following
 from within the root project directory:
