@@ -123,7 +123,7 @@ describe("The github plugin", function () {
             [
               "[![Bandwidth Labs]",
               "(https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)]",
-              "(http://vitrino.herokuapp.com)"
+              "(http://showcase.bandwidthlabs.com)"
             ].join("")
           );
 

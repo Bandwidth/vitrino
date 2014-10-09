@@ -21,7 +21,7 @@ GitHub.createReadme = function (organization, repository, status, badge) {
   var content = badge ?
     "[![Bandwidth Labs]" +
     "(https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)]" +
-    "(http://vitrino.herokuapp.com)"
+    "(http://showcase.bandwidthlabs.com)"
     :
     "";
 

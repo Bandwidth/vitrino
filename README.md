@@ -2,7 +2,7 @@ vitrino
 =======
 
 [![Build Status](https://travis-ci.org/bandwidthcom/vitrino.svg?branch=master)](https://travis-ci.org/bandwidthcom/vitrino)
-[![Bandwidth Labs](https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)](http://vitrino.herokuapp.com)
+[![Bandwidth Labs](https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)](http://showcase.bandwidthlabs.com)
 
 > Bandwidth Labs project showcase.
 
@@ -23,7 +23,7 @@ showcase application badge in the `README.md`.
 In the current version of the application, the badge must appear verbatim in
 the README. The following is the only acceptable badge format:
 
-    [![Bandwidth Labs](https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)](http://vitrino.herokuapp.com)
+    [![Bandwidth Labs](https://img.shields.io/badge/bandwidth_labs-showcase-orange.svg)](http://showcase.bandwidthlabs.com)
 
 If both criteria are met, the project will automatically show up on the
 [projects page][showcase-projects].
@@ -64,5 +64,5 @@ from within the root project directory:
 
 [bandwidthcom]: https://github.com/bandwidthcom "Bandwidth Labs Organization"
 [github]: https://github.com "GitHub"
-[showcase]: http://vitrino.herokuapp.com "Bandwidth Labs Showcase"
-[showcase-projects]: http://vitrino.herokuapp.com/projects "Showcase Projects"
+[showcase]: http://showcase.bandwidthlabs.com "Bandwidth Labs Showcase"
+[showcase-projects]: http://showcase.bandwidthlabs.com/projects "Showcase Projects"
